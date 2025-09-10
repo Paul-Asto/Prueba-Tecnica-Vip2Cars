@@ -21,8 +21,33 @@ class PropietarioRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        if ($this->method() == "POST"){
+            return [
+                "nombre" => "required|string|min:1|max:25",
+                "apellidos" => "required|string|min:1|max:25",
+                "dni" => "required|string|min:8|max:8",
+                "correo" => "email:rfc,dns",
+                "telefono" =>"string|alpha_num|min:9|max:10",
+            ];
+        }
+
+        elseif ($this->method() == "GET"){
+            return [
+                "id" => "uuid|exist:propietarios,id",
+            ];
+        }
+        elseif ($this->method() == "PUT" || $this->method() == "DELETE"){
+            return [
+                "id" => "required|uuid|exist:propietarios,id",
+                "nombre" => "string|min:1|max:25",
+                "apellidos" => "string|min:1|max:25",
+                "dni" => "string|min:8|max:8",
+                "correo" => "email:rfc,dns",
+                "telefono" =>"string|alpha_num|min:9|max:10",
+            ];
+        }
+
+        return [];
     }
+
 }

@@ -21,8 +21,24 @@ class MarcaRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        if ($this->method() == "POST"){
+            return [
+                "nombre" => "string|min:1|max:25|unique:marcas,nombre",
+            ];
+        }
+
+        elseif ($this->method() == "GET"){
+            return [
+                "id" => "integer"
+            ];
+        }
+        elseif ($this->method() == "PUT" || $this->method() == "DELETE"){
+            return [
+                "id" => "required|integer|",
+                "nombre" => "required|string|min:1|max:25|unique:marcas,nombre",
+            ];
+        }
+
+        return [];
     }
 }
