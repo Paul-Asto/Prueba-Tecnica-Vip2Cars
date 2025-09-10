@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             console.log(data)
         });
-        //location.reload(true); 
+        location.reload(true); 
     })
 });
 
