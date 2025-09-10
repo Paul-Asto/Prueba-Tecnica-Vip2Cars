@@ -3,21 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Marca extends Model
+class Modelo extends Model
 {
     protected $fillable = [
         "id",
         "nombre",
+        "id_marca",
     ];
-
+    
     protected $visible = [
         "id",
         "nombre",
+        "id_marca",
     ];
-
-    function modelos(): HasMany{
-        return $this->hasMany(ModelO::class);
+    
+    function marca() :BelongsTo{
+        return $this->belongsTo(Marca::class);
     }
 }
