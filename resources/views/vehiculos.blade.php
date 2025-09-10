@@ -14,6 +14,7 @@
             "marcas" => $marcas,
             "propietarios" => $propietarios,
         ])
+        <p id="info-errors" style="color: rgb(160, 17, 17)"></p>
         <h1>Tabla de Vehiculos</h1>
         @include('/componentes/table', $vehiculos)
         {{ $vehiculos->links()}}
@@ -48,16 +49,20 @@ document.addEventListener('DOMContentLoaded', function() {
             body: JSON.stringify(data)
         })
         .then(respuesta => {
-            if (!respuesta.ok) {
-                throw new Error(`Error HTTP: ${respuesta.status}`);
-            }
-            
             return respuesta.json()
         })
         .then(data => {
+            if (data["message"]){
+            let info_error = document.getElementById("info-errors")
+            info_error.textContent = data["message"]
+            }
+            else{
+                location.reload(true)
+            }
+
+            
             console.log(data)
         });
-        location.reload(true); 
     })
 
     let delete_forms = document.getElementsByClassName("form-delete");
@@ -85,46 +90,46 @@ document.addEventListener('DOMContentLoaded', function() {
             location.reload(true); 
         })
     }
-});
 
 
-const selectMarcas = document.getElementById('marca');
+    const selectMarcas = document.getElementById('marca');
 
-selectMarcas.addEventListener('change', (event) => {
-    const selectModelos = document.getElementById('modelo');
-    const valorSeleccionado = event.target.value;
+    selectMarcas.addEventListener('change', (event) => {
+        const selectModelos = document.getElementById('modelo');
+        const valorSeleccionado = event.target.value;
 
-    selectModelos.innerHTML = '<option value="" disabled selected>Elige un modelo</option>';
+        selectModelos.innerHTML = '<option value="" disabled selected>Elige un modelo</option>';
 
 
-    fetch(`http://127.0.0.1:8000/api/v1/modelo/marca/${valorSeleccionado}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
-    })
-    .then(respuesta => {
-        if (!respuesta.ok) {
-            throw new Error(`Error HTTP: ${respuesta.status}`);
-        }
-        
-        return respuesta.json();
-    })
-    .then(data => {
-        const modelos = data["data"]
-        modelos.forEach(modelo => {
-        const opcion = document.createElement('option');
-        opcion.value = modelo["id"]
-        opcion.textContent = modelo["nombre"];
-        selectModelos.appendChild(opcion);
+        fetch(`http://127.0.0.1:8000/api/v1/modelo/marca/${valorSeleccionado}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
+        .then(respuesta => {
+            if (!respuesta.ok) {
+                throw new Error(`Error HTTP: ${respuesta.status}`);
+            }
+            
+            return respuesta.json();
+        })
+        .then(data => {
+            const modelos = data["data"]
+            modelos.forEach(modelo => {
+            const opcion = document.createElement('option');
+            opcion.value = modelo["id"]
+            opcion.textContent = modelo["nombre"];
+            selectModelos.appendChild(opcion);
 
-        const selectModelosInstance = M.FormSelect.getInstance(selectModelos);
-        selectModelosInstance.destroy();
-        M.FormSelect.init(selectModelos);
+            const selectModelosInstance = M.FormSelect.getInstance(selectModelos);
+            selectModelosInstance.destroy();
+            M.FormSelect.init(selectModelos);
+        });
+        })
+
     });
-    })
-
 });
 
 
