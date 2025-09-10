@@ -80,7 +80,7 @@ El entorno de desarrollo tiene que cumplir con los siguientes requisitos para ej
 
 -----
 
-## 🗄️ Estructura de la Base de Datos
+## Estructura de la Base de Datos
 
 ``` py
 
@@ -193,6 +193,43 @@ return new class extends Migration
     }
 };
 
+```
+## Rutas de la API
+```
+    GET     http://localhost/api/v1/vehiculo        -> Devuelve todos los vehiculos
+    GET     http://localhost/api/v1/vehiculo/id     -> Devuelve un vehiculo que coincida con el id del parametro
+    POST    http://localhost/api/v1/vehiculo/       -> Crea un nuevo vehiculo siempre y cuando se le pasen los parametros 
+                                                       correctos en el cuerpo de la peticion
+    PUT     http://localhost/api/v1/vehiculo/id     -> Modifica el vehiculo con el id especificado, modifica los campos con 
+                                                        los valores validos pasados en el cuerpo de la peticion
+    DELETE  http://localhost/api/v1/vehiculo/id     -> Elimina el vehiculo con el id especificado
+
+
+    GET     http://localhost/api/v1/propietario        -> Devuelve todos los propietarios
+    GET     http://localhost/api/v1/propietario/id     -> Devuelve un propietario que coincida con el id del parametro
+    POST    http://localhost/api/v1/vpropietario/       -> Crea un nuevo propietario siempre y cuando se le pasen los parametros 
+                                                       correctos en el cuerpo de la peticion
+    PUT     http://localhost/api/v1/propietario/id     -> Modifica el propietario con el id especificado, modifica los campos con 
+                                                        los valores validos pasados en el cuerpo de la peticion
+    DELETE  http://localhost/api/v1/propietario/id     -> Elimina el propietario con el id especificado
+
+
+    GET     http://localhost/api/v1/marca        -> Devuelve todas las marcas
+    GET     http://localhost/api/v1/marca/id     -> Devuelve una marca que coincida con el id del parametro
+    POST    http://localhost/api/v1marca/       -> Crea una nueva marca siempre y cuando se le pasen los parametros 
+                                                       correctos en el cuerpo de la peticion
+    PUT     http://localhost/api/v1/marca/id     -> Modifica la amrca con el id especificado, modifica los campos con 
+                                                        los valores validos pasados en el cuerpo de la peticion
+    DELETE  http://localhost/api/v1/marca/id     -> Elimina la marca con el id especificado
+   
+
+    GET     http://localhost/api/v1/modelo        -> Devuelve todos los mdelos
+    GET     http://localhost/api/v1/modelo/id     -> Devuelve un modelo que coincida con el id del parametro
+    POST    http://localhost/api/v1/modelo/       -> Crea un nuevo modelo siempre y cuando se le pasen los parametros 
+                                                       correctos en el cuerpo de la peticion
+    PUT     http://localhost/api/v1/modelo/id     -> Modifica el modelo con el id especificado, modifica los campos con 
+                                                        los valores validos pasados en el cuerpo de la peticion
+    DELETE  http://localhost/api/v1/mdelo/id     -> Elimina el modelo con el id especificado
 ```
 
 ## Modelo de Encuestas Anonimas
