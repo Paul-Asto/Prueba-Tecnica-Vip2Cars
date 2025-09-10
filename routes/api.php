@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\MarcaController;
+use App\Http\Controllers\ModeloController;
+use App\Http\Controllers\PropietarioController;
+use App\Http\Controllers\VehiculoController;
 use App\Models\Marca;
 use App\Models\Modelo;
 use App\Models\Propietario;
@@ -7,7 +11,7 @@ use App\Models\Vehiculo;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix("/v1")->group(function (){
-    Route::prefix("/vehiculo")->controller(Vehiculo::class)->group(function(){
+    Route::prefix("/vehiculo")->controller(VehiculoController::class)->group(function(){
         Route::get("/{vehiculo}", "findById");
         Route::get("/", "getAll");
         Route::post("/", "create");
@@ -15,7 +19,7 @@ Route::prefix("/v1")->group(function (){
         Route::delete("/{vehiculo}", "delete");
     });
 
-    Route::prefix("/propietario")->controller(Propietario::class)->group(function(){
+    Route::prefix("/propietario")->controller(PropietarioController::class)->group(function(){
         Route::get("/{propietario}", "findById");
         Route::get("/", "getAll");
         Route::post("/", "create");
@@ -23,7 +27,7 @@ Route::prefix("/v1")->group(function (){
         Route::delete("/{propietario}", "delete");
     });
 
-    Route::prefix("/marca")->controller(Marca::class)->group(function(){
+    Route::prefix("/marca")->controller(MarcaController::class)->group(function(){
         Route::get("/{marca}", "findById");
         Route::get("/", "getAll");
         Route::post("/", "create");
@@ -31,7 +35,8 @@ Route::prefix("/v1")->group(function (){
         Route::delete("/{marca}", "delete");
     });
 
-        Route::prefix("/modelo")->controller(Modelo::class)->group(function(){
+        Route::prefix("/modelo")->controller(ModeloController::class)->group(function(){
+        Route::get("/marca/{id_marca}", "getFromMarca");
         Route::get("/{modelo}", "findById");
         Route::get("/", "getAll");
         Route::post("/", "create");
