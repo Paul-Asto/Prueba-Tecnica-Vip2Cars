@@ -25,10 +25,36 @@
 
     
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
     M.FormSelect.init(elems);
+
+    let form = document.getElementById("form-create");
+
+    form.addEventListener("submit", (event)=>{
+        event.preventDefault(); 
+
+        fetch(`http://127.0.0.1:8000/api/v1/vehiculo`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
+        .then(respuesta => {
+            if (!respuesta.ok) {
+                throw new Error(`Error HTTP: ${respuesta.status}`);
+            }
+            
+            return respuesta.json()
+        })
+        .then(data => {
+            console.log(data)
+        });
+        //location.reload(true); 
+    })
 });
 
 
@@ -36,40 +62,42 @@ const selectMarcas = document.getElementById('marca');
 
 selectMarcas.addEventListener('change', (event) => {
     const selectModelos = document.getElementById('modelo');
-    const marcaSeleccionada = event.target.value;
+    const valorSeleccionado = event.target.value;
 
-    selectModelos.innerHTML = '<option value="" disabled selected>-- Elige un modelo --</option>';
-
-    if (marcaSeleccionada) {
-            fetch(`http://127.0.0.1:8000/api/v1/modelo/marca/${marcaSeleccionada}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            })
-            .then(respuesta => {
-                if (!respuesta.ok) {
-                    throw new Error(`Error HTTP: ${respuesta.status}`);
-                }
-                return respuesta.json();
-            })
-            .then(data => {
-                console.console.log(data);
-                
-                const modelos = data["data"]
-                modelos.forEach(modelo => {
-                const opcion = document.createElement('option');
-                opcion.value = modelo["id"]
-                opcion.textContent = modelo["nombre"];
-                selectModelos.appendChild(opcion);
-        });
-            })
-    }
+    selectModelos.innerHTML = '<option value="" disabled selected>Elige un modelo</option>';
 
 
+    fetch(`http://127.0.0.1:8000/api/v1/modelo/marca/${valorSeleccionado}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    })
+    .then(respuesta => {
+        if (!respuesta.ok) {
+            throw new Error(`Error HTTP: ${respuesta.status}`);
+        }
+        
+        return respuesta.json();
+    })
+    .then(data => {
+        const modelos = data["data"]
+        modelos.forEach(modelo => {
+        const opcion = document.createElement('option');
+        opcion.value = modelo["id"]
+        opcion.textContent = modelo["nombre"];
+        selectModelos.appendChild(opcion);
+
+        const selectModelosInstance = M.FormSelect.getInstance(selectModelos);
+        selectModelosInstance.destroy();
+        M.FormSelect.init(selectModelos);
+    });
+    })
 
 });
+
+
 </script>
 </body>
 </html>

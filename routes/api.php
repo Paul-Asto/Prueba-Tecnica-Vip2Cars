@@ -4,10 +4,6 @@ use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\PropietarioController;
 use App\Http\Controllers\VehiculoController;
-use App\Models\Marca;
-use App\Models\Modelo;
-use App\Models\Propietario;
-use App\Models\Vehiculo;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix("/v1")->group(function (){

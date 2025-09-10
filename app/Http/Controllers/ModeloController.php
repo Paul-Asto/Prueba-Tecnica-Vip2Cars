@@ -44,7 +44,7 @@ class ModeloController extends Controller
         return response(["data" => Modelo::all()]);
     }
 
-    function getFromMarca($id_marca){
-        return response(["data" => Modelo::where("id_marca", $id_marca)]);
+    function getFromMarca(string $id_marca){
+        return response(["data" => Modelo::where("id_marca", $id_marca)->get()]);
     }
 }
