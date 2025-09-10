@@ -59,6 +59,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         location.reload(true); 
     })
+
+    let delete_forms = document.getElementsByClassName("form-delete");
+
+    for (let form of delete_forms){
+        form.addEventListener("submit", (event)=>{
+            event.preventDefault(); 
+            fetch(`http://127.0.0.1:8000/api/v1/vehiculo/${event.target.id.value}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+            })
+            .then(respuesta => {
+                if (!respuesta.ok) {
+                    throw new Error(`Error HTTP: ${respuesta.status}`);
+                }
+                
+                return respuesta.json()
+            })
+            .then(data => {
+                console.log(data)
+            });
+            location.reload(true); 
+        })
+    }
 });
 
 

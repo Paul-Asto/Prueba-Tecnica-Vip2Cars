@@ -34,5 +34,5 @@
     </select>
     <br>
 
-    <button id="btn-crear-vehiculo" class="btn" type="submit">Enviar</button>
+    <button id="btn-crear-vehiculo" class="btn" type="submit">CrearVehiculo</button>
 </form>

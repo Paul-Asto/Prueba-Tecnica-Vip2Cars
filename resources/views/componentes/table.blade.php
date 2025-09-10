@@ -19,14 +19,14 @@
                 
                 <td >
                     <div style="display: flex;flex-direction: row;justify-content:space-evenly">
-                        <form id="form-update" method="POST">
+                        <form class="form-update" method="POST">
                             @foreach ($entity as $field => $value)        
                                 <input type="hidden" name="{{$field}}" value="{{$value}}">  
                             @endforeach
                             <button class="btn"  type="submid">Editar</button>
                         </form>
 
-                        <form id="form-delete" method="POST">
+                        <form class="form-delete" method="DELETE">
                             <input type="hidden" name="id" value="{{$entity["id"]}}">
                             <button class="btn" type="submid" >Eliminar</button>
                         </form>
