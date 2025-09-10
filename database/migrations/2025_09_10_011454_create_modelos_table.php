@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('modelos', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string("nombre", 25)->nullable(False);
+            $table->unsignedBigInteger('id_marca');
             $table->foreign("id_marca")->references("id")->on("marcas");
             $table->timestamps();
         });

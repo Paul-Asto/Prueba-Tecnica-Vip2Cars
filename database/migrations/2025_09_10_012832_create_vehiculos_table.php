@@ -15,6 +15,8 @@ return new class extends Migration
             $table->uuid("id")->primary();
             $table->string("placa", 10);
             $table->integer("año_fabricacion");
+            $table->unsignedBigInteger('id_modelo');
+            $table->uuid("id_propietario");
             $table->foreign("id_modelo")->references("id")->on("modelos");
             $table->foreign("id_propietario")->references("id")->on("propietarios");
             $table->timestamps();

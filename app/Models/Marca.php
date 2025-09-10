@@ -18,6 +18,6 @@ class Marca extends Model
     ];
 
     function modelos(): HasMany{
-        return $this->hasMany(Modelo::class);
+        return $this->hasMany(Modelo::class, "id_marca");
     }
 }

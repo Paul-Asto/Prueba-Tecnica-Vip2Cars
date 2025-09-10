@@ -27,10 +27,10 @@ class Vehiculo extends Model
     ];
     
     function propietario() :BelongsTo{
-        return $this->belongsTo(Propietario::class);
+        return $this->belongsTo(Propietario::class, "id_propietario");
     }
     
     function modelo() :BelongsTo{
-        return $this->belongsTo(Modelo::class);
+        return $this->belongsTo(Modelo::class, "id_modelo");
     }
 }

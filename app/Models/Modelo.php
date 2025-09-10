@@ -21,10 +21,10 @@ class Modelo extends Model
     ];
     
     function marca() :BelongsTo{
-        return $this->belongsTo(Marca::class);
+        return $this->belongsTo(Marca::class, "id_marca");
     }
     
     function vehiculos(): HasMany{
-        return $this->hasMany(Vehiculo::class);
+        return $this->hasMany(Vehiculo::class, "id_modelo");
     }
 }

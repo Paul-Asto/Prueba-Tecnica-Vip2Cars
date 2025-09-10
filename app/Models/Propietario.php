@@ -27,6 +27,6 @@ class Propietario extends Model
     ];
 
     function vehiculos(): HasMany{
-        return $this->hasMany(Vehiculo::class);
+        return $this->hasMany(Vehiculo::class, "id_propietario");
     }
 }
