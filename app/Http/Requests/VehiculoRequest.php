@@ -23,10 +23,10 @@ class VehiculoRequest extends FormRequest
     {
         if ($this->method() == "POST"){
             return [
-                "placa" => "required|regex/^[A-Z]{3}-\d{3,4}$/",
-                "año_fabricacion" => "required|integer|min:1900|max:' . date('Y')",
-                "id_modelo" => "required|uuid|exist:modelos,id",
-                "id_propietario" => "required|uuid|exist:propietarios,id",
+                "placa" => ["regex:/^[A-Z]{3}-\d{3,4}$/", "required"],
+                "año_fabricacion" => "required|integer|min:1900|max:" . date('Y'),
+                "id_modelo" => "required|integer|exists:modelos,id",
+                "id_propietario" => "required|uuid|exists:propietarios,id",
             ];
         }
         
@@ -37,11 +37,11 @@ class VehiculoRequest extends FormRequest
         }
         elseif ($this->method() == "PUT" || $this->method() == "DELETE"){
             return [
-                "id" => "required|uuid|exist:vehiculos,id",
-                "placa" => "regex/^[A-Z]{3}-\d{3,4}$/",
-                "año_fabricacion" => "integer|min:1900|max:' . date('Y')",
-                "id_modelo" => "uuid|exist:modelos,id",
-                "id_propietario" => "uuid|exist:propietarios,id",
+                "id" => "required|uuid|exists:vehiculos,id",
+                "placa" => ["regex:/^[A-Z]{3}-\d{3,4}$/"],
+                "año_fabricacion" => "integer|min:1900|max:" . date('Y'),
+                "id_modelo" => "integer|exists:modelos,id",
+                "id_propietario" => "uuid|exists:propietarios,id",
             ];
         }
         

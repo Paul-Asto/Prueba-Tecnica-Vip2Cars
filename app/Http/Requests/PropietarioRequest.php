@@ -33,12 +33,12 @@ class PropietarioRequest extends FormRequest
 
         elseif ($this->method() == "GET"){
             return [
-                "id" => "uuid|exist:propietarios,id",
+                "id" => "uuid|exists:propietarios,id",
             ];
         }
         elseif ($this->method() == "PUT" || $this->method() == "DELETE"){
             return [
-                "id" => "required|uuid|exist:propietarios,id",
+                "id" => "required|uuid|exists:propietarios,id",
                 "nombre" => "string|min:1|max:25",
                 "apellidos" => "string|min:1|max:25",
                 "dni" => "string|min:8|max:8",

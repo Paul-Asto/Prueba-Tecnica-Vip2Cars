@@ -24,19 +24,19 @@ class ModeloRequest extends FormRequest
         if ($this->method() == "POST"){
             return [
                 "nombre" => "required|string|min:1|max:25|unique:modelos,nombre",
-                "id_marca" => "required|integer|exist:marcas,id"
+                "id_marca" => "required|integer|exists:marcas,id"
             ];
         }
 
         elseif ($this->method() == "GET"){
             return [
-                "id" => "integer|exist:modelos,id"
+                "id" => "integer|exists:modelos,id"
             ];
         }
         elseif ($this->method() == "PUT" || $this->method() == "DELETE"){
             return [
                 "nombre" => "string|min:1|max:25|unique:modelos,nombre",
-                "id" => "required|integer|exist:modelos,id"
+                "id" => "required|integer|exists:modelos,id"
             ];
         }
 
