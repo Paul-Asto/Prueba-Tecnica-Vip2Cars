@@ -36,12 +36,16 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener("submit", (event)=>{
         event.preventDefault(); 
 
+        const formData = new FormData(event.target);
+        let data = Object.fromEntries(formData.entries());
+
         fetch(`http://127.0.0.1:8000/api/v1/vehiculo`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
-            }
+            },
+            body: JSON.stringify(data)
         })
         .then(respuesta => {
             if (!respuesta.ok) {
