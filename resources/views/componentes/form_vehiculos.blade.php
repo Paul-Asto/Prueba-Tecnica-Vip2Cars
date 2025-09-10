@@ -24,8 +24,9 @@
         <option value="" disabled selected>Elige una opcion</option>
     </select>
     <br>
-
+    
     <label for="id_propietario">Selecciona un propietario:</label>
+    <input type="text" id="search_propietario" placeholder="Busca un propietario">
     <select id="propietario" name="id_propietario">
         <option value="" disabled selected>Elige una opcion</option>
         @foreach ($propietarios as $propietario)
@@ -34,5 +35,5 @@
     </select>
     <br>
 
-    <button id="btn-crear-vehiculo" class="btn" type="submit">CrearVehiculo</button>
+    <button id="btn-crear-vehiculo" class="btn" type="submit">Crear Vehiculo</button>
 </form>

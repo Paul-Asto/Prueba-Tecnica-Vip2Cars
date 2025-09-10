@@ -28,10 +28,28 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 <script>
+
+function updateOptionsOffSelect(select, newOptions){
+            select.innerHTML = '<option value="" disabled selected>Elige una opcion</option>';
+            newOptions.forEach(modelo => {
+            const opcion = document.createElement('option');
+            opcion.value = modelo["id"]
+            opcion.textContent = modelo["nombre"];
+            select.appendChild(opcion);
+            });
+
+            const selectModelosInstance = M.FormSelect.getInstance(select);
+            selectModelosInstance.destroy();
+            M.FormSelect.init(select);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    //Inicializa los select de Materialize CSS
     var elems = document.querySelectorAll('select');
     M.FormSelect.init(elems);
 
+
+    // Manejo de evento Submid del formulario de creacion de Vehiculos
     let form = document.getElementById("form-create");
 
     form.addEventListener("submit", (event)=>{
@@ -65,6 +83,41 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     })
 
+
+    //Manejo de Actualizacion de input de busueda de propietarios
+    const searchInput = document.getElementById('search_propietario');
+    const data_propietarios = {!! json_encode(["data" => $propietarios->toArray()]) !!}["data"]
+        .map((propietario)=>{
+                return {
+                    "id": propietario["id"],
+                    "nombre": propietario["nombre"] + " " + propietario["apellidos"]
+                }
+
+            })
+
+    searchInput.addEventListener('input', (event) => {
+        const nuevoValor = event.target.value;
+        console.log(nuevoValor)
+        const select_update = document.getElementById("propietario");
+        
+
+
+        const newOptions = data_propietarios
+            .filter((dato_propietario)=>{
+                if (dato_propietario["nombre"].toLowerCase().includes(nuevoValor.toLowerCase())){
+                    return true
+                }
+                return false
+            })
+        console.log(newOptions)
+
+        updateOptionsOffSelect(select_update, newOptions)
+    
+        
+    });
+
+
+    // Manejo de eventos de los formulrios de eliminacion de vehiculos
     let delete_forms = document.getElementsByClassName("form-delete");
 
     for (let form of delete_forms){
@@ -91,15 +144,12 @@ document.addEventListener('DOMContentLoaded', function() {
         })
     }
 
-
+    //Manejo de evendo de actualizacion de select Marca
     const selectMarcas = document.getElementById('marca');
 
     selectMarcas.addEventListener('change', (event) => {
         const selectModelos = document.getElementById('modelo');
         const valorSeleccionado = event.target.value;
-
-        selectModelos.innerHTML = '<option value="" disabled selected>Elige un modelo</option>';
-
 
         fetch(`http://127.0.0.1:8000/api/v1/modelo/marca/${valorSeleccionado}`, {
             method: 'GET',
@@ -117,16 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(data => {
             const modelos = data["data"]
-            modelos.forEach(modelo => {
-            const opcion = document.createElement('option');
-            opcion.value = modelo["id"]
-            opcion.textContent = modelo["nombre"];
-            selectModelos.appendChild(opcion);
-
-            const selectModelosInstance = M.FormSelect.getInstance(selectModelos);
-            selectModelosInstance.destroy();
-            M.FormSelect.init(selectModelos);
-        });
+            updateOptionsOffSelect(selectModelos, modelos)
         })
 
     });
