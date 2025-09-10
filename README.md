@@ -195,4 +195,16 @@ return new class extends Migration
 
 ```
 
+## Modelo de Encuestas Anonimas
+El modelo de encuestas anonimas se comforma de 4 entidades:
 
+- Las encuestas: Son un grupo de preguntas, tienen un titulo y una descripcion acerca de la tematica de las preguntas
+
+- Las preguntas: tienen la informacion de lo que se preguntara, ademas de la respuesta ideal, pertenecen a una encuesta
+
+- Las Opciones: representa la cantidad de opciones que tiene una pregunta y que un registro puede elegir
+
+- Registros: Es el registro de el resultado de una pregunta, adjuntando la respuesta, realizado en cierta encuesta, son los datos totales que tiene informacion del total de registros hechos y estadisticas de error y acierto en las preguntas de cada encuesta
+
+
+<img src="./modelo_de_encuestas_anonimas/modelo_encuesta.png" width="800px">
