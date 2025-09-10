@@ -14,7 +14,7 @@
             "marcas" => $marcas,
             "propietarios" => $propietarios,
         ])
-
+        <h1>Tabla de Vehiculos</h1>
         @include('/componentes/table', $vehiculos)
         {{ $vehiculos->links()}}
     </div>

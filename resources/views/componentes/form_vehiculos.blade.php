@@ -1,5 +1,5 @@
 
-
+<h1>Formulario de creacion de Vehiculos</h1>
 <form id="form-create" class="teal lighten-5" method="POST">
     @csrf
     <label for="placa">Placa:</label>
