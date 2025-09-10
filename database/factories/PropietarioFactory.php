@@ -19,10 +19,11 @@ class PropietarioFactory extends Factory
     public function definition(): array
     {
         return [
-            "nombre" => $this->faker->name(),
+            "nombre" => $this->faker->firstName(),
             "apellidos" => $this->faker->lastName(),
             "correo" => $this->faker->unique()->safeEmail(),
             "telefono" => $this->faker->unique()->phoneNumber(),
+            "dni" => $this->faker->regexify('[0-9]{8}'),
         ];
     }
 }

@@ -27,7 +27,7 @@ class PropietarioRequest extends FormRequest
                 "apellidos" => "required|string|min:1|max:25",
                 "dni" => "required|string|min:8|max:8",
                 "correo" => "email:rfc,dns",
-                "telefono" =>"string|alpha_num|min:9|max:10",
+                "telefono" =>"string|alpha_num|min:9|max:20",
             ];
         }
 
@@ -43,7 +43,7 @@ class PropietarioRequest extends FormRequest
                 "apellidos" => "string|min:1|max:25",
                 "dni" => "string|min:8|max:8",
                 "correo" => "email:rfc,dns",
-                "telefono" =>"string|alpha_num|min:9|max:10",
+                "telefono" =>"string|alpha_num|min:9|max:20",
             ];
         }
 

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("apellidos", 25)->nullable(false);
             $table->string("dni", 8)->nullable(false);
             $table->string("correo", 50)->nullable();
-            $table->string("telefono", 9)->nullable();
+            $table->string("telefono", 20)->nullable();
             $table->timestamps();
         });
     }
